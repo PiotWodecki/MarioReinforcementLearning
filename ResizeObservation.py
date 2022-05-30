@@ -1,6 +1,8 @@
 import gym
 import cv2
 from gym.spaces import Box
+import numpy as np
+
 
 class ResizeObservation(gym.ObservationWrapper):
     """Downsample the image observation to a square image. """
