@@ -10,7 +10,6 @@ from SkipFrame import SkipFrame
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
-import random
 from datetime import datetime as dt
 from pathlib import Path
 
@@ -19,12 +18,8 @@ from gym.wrappers import FrameStack, GrayScaleObservation, TransformObservation
 from nes_py.wrappers import JoypadSpace
 
 
-# Initialize Super Mario environment
 env = gym_super_mario_bros.make('SuperMarioBros-v0')
 
-# Limit the action-space to
-#   0. walk right
-#   1. jump right
 env = JoypadSpace(
     env,
     [['right'],
@@ -49,14 +44,13 @@ save_dir.mkdir(parents=True)
 checkpoint = None # Path('checkpoints/2020-10-21T18-25-27/mario.chkpt')
 # mario = Mario(state_dim=(4, 84, 84), action_dim=env.action_space.n, save_dir=save_dir, checkpoint=checkpoint)
 mario = Mario(state_dim=(4, 84, 84), action_dim=env.action_space.n, checkpoint=checkpoint)
-model_chkpt = Path('checkpoints/2022-05-20T14-15-28/mario_net_2.chkpt')
+model_chkpt = Path('mario_net_218.chkpt')
 mario.load(model_chkpt)
 
 logger = MetricLogger(save_dir)
 
 episodes = 40000
 
-## for Loop that train the model num_episodes times by playing the game
 for e in range(episodes):
 
     # env.seed(1)

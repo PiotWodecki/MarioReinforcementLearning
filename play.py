@@ -27,7 +27,7 @@ env = TransformObservation(env, f=lambda x: x / 255.)
 env = FrameStack(env, num_stack=4)
 env = CustomReward(env)
 
-checkpoint = Path('checkpoints/2022-05-18T00-14-04/mario_net_218.chkpt')
+checkpoint = Path('mario_net_218.chkpt')
 mario = Mario(state_dim=(4, 84, 84), action_dim=env.action_space.n, checkpoint=checkpoint)
 mario.load(checkpoint)
 # Start the game
